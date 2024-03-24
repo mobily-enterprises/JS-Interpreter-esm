@@ -4,13 +4,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-// import acorn from './acorn.js'
-// var asEsm = true
-debugger
 var Interpreter
-var acorn
+
 (function (root, factory) {
-  debugger
   if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
       // CommonJS
       exports.acorn = require('./acorn.js')
@@ -1573,7 +1569,6 @@ Interpreter.prototype.initString = function(globalObject) {
   var wrapper;
   // String constructor.
   wrapper = function String(value) {
-debugger
     value = arguments.length ? String(value) : '';
     if (thisInterpreter.calledWithNew()) {
       // Called as `new String()`.
@@ -4842,5 +4837,3 @@ Interpreter['VALUE_IN_DESCRIPTOR'] = Interpreter.VALUE_IN_DESCRIPTOR;
 Interpreter['Status'] = Interpreter.Status;
 }))
 
-// export var Interpreter
-// export var acorn

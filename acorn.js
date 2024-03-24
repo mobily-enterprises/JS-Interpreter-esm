@@ -26,9 +26,10 @@
 // [dammit]: acorn_loose.js
 // [walk]: util/walk.js
 
-debugger
+var parse
+var version
+
 (function (root, factory) {
-  debugger
    if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
       // CommonJS
       factory(exports);
@@ -39,7 +40,7 @@ debugger
 }(typeof self !== 'undefined' ? self : this, function (exports) {
   "use strict";
 
-  exports.version = "0.5.0";
+  exports.version = version = "0.5.0";
   // Plus additional edits marked with 'JS-Interpreter change' comments.
 
   // JS-Interpreter change:
@@ -79,7 +80,7 @@ debugger
    * @param {Object=} opts
    * @returns
    */
-  exports.parse = function(inpt, opts) {
+  exports.parse = parse = function(inpt, opts) {
     input = String(inpt);
     inputLen = input.length;
     setOptions(opts);

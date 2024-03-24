@@ -1,21 +1,25 @@
 const fs = require('fs');
 
-const originalFilePath = 'JS-Interpreter.js';
-const newFilePath = 'JS-Interpreter-esm.js';
-const contentToAddBefore = '// Your content to add before\n';
+// File paths and content to add
+const filesToModify = [
+  { original: 'interpreter.js', new: 'interpreter-esm.js', insertionAnchor: 'var Interpreter', contentToAdd: "import { parse, version } from './acorn-esm.js'\nvar asEsm = true\nexport { Interpreter, parse, version as acornVersion }\n\n" },
+  { original: 'acorn.js', new: 'acorn-esm.js', insertionAnchor: 'var version', contentToAdd: "export { parse, version }\n\n" }
+];
 
-// Read the original file content
-const originalContent = fs.readFileSync(originalFilePath, 'utf8');
+// Loop through each file to modify
+filesToModify.forEach(file => {
+  const originalContent = fs.readFileSync(file.original, 'utf8');
+  const insertionIndex = originalContent.indexOf(file.insertionAnchor);
 
-// Find the index of the line to insert before
-const insertionIndex = originalContent.indexOf('(function (root, factory) {');
+  if (insertionIndex !== -1) {
+    const insertionPoint = insertionIndex + file.insertionAnchor.length;
+    const newContent = originalContent.substring(0, insertionPoint) + '\n' +  // Add newline character
+                      file.contentToAdd +
+                      originalContent.substring(insertionPoint);
 
-if (insertionIndex !== -1) {
-    // Insert the content before the line
-    const newContent = originalContent.slice(0, insertionIndex) + contentToAddBefore + originalContent.slice(insertionIndex);
-
-    // Write the new content to the new file
-    fs.writeFileSync(newFilePath, newContent);
-} else {
-    console.error('Line not found');
-}
+    fs.writeFileSync(file.new, newContent);
+    console.log(`Modified ${file.original} and saved as ${file.new}`);
+  } else {
+    console.error(`Insertion anchor not found in ${file.original}`);
+  }
+});
