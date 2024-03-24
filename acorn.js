@@ -26,11 +26,15 @@
 // [dammit]: acorn_loose.js
 // [walk]: util/walk.js
 
-(function(root, mod) {
-  if (typeof exports === "object" && typeof module === "object") return mod(exports); // CommonJS
-  if (typeof define === "function" && define.amd) return define(["exports"], mod); // AMD
-  mod(root.acorn || (root.acorn = {})); // Plain browser env
-})((typeof globalThis === 'undefined') ? this || window : globalThis, function(exports) {
+(function (root, factory) {
+   if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
+      // CommonJS
+      factory({});
+  } else {
+      // Browser globals
+      factory(root);
+  }
+}(typeof self !== 'undefined' ? self : this, function (exports) {
   "use strict";
 
   exports.version = "0.5.0";
