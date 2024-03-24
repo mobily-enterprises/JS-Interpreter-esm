@@ -5,20 +5,23 @@
  */
 
 // import acorn from './acorn.js'
-
+// var asEsm = true
+debugger
 var Interpreter
+var acorn
 (function (root, factory) {
+  debugger
   if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
       // CommonJS
-      const acorn = require('./acorn.js')
+      acorn = require('./acorn.js')
       factory({acorn});
-  } else if (typeof acorn !== 'undefined'){
+  } else if (typeof asEsm !== 'undefined'){
       // ESM
       // No need to define acorn, since it will be defined in an injected line
       factory({acorn})
   } else {  
       // Browser globals
-      if (!root.acorn) throw new Error('Acorn needs to be in the `window` namespace')
+      // if (!root.acorn) throw new Error('Acorn needs to be in the `window` namespace')
       factory(root);
   }
 }(typeof self !== 'undefined' ? self : this, function (exports) {
@@ -4838,4 +4841,5 @@ Interpreter['VALUE_IN_DESCRIPTOR'] = Interpreter.VALUE_IN_DESCRIPTOR;
 Interpreter['Status'] = Interpreter.Status;
 }))
 
-export var Interpreter
+// export var Interpreter
+// export var acorn

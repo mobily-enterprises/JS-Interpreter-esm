@@ -26,13 +26,15 @@
 // [dammit]: acorn_loose.js
 // [walk]: util/walk.js
 
+debugger
 (function (root, factory) {
+  debugger
    if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
       // CommonJS
       factory({});
   } else {
       // Browser globals
-      factory(root);
+      factory(root.acorn || (root.acorn = {}));
   }
 }(typeof self !== 'undefined' ? self : this, function (exports) {
   "use strict";
@@ -2284,4 +2286,4 @@
     return finishNode(node, "Identifier");
   }
 
-});
+}))
