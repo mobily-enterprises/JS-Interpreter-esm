@@ -2,8 +2,8 @@ const fs = require('fs');
 
 // File paths and content to add
 const filesToModify = [
-  { original: 'interpreter.js', new: 'interpreter-esm.js', insertionAnchor: 'var Interpreter', contentToAdd: "import { parse, version } from './acorn-esm.js'\nvar asEsm = true\nexport { Interpreter, parse, version as acornVersion }\n\n" },
-  { original: 'acorn.js', new: 'acorn-esm.js', insertionAnchor: 'var version', contentToAdd: "export { parse, version }\n\n" }
+  { original: 'interpreter.js', new: 'interpreter-esm.js', insertionAnchor: 'var Interpreter', contentToAdd: "import { parse, version } from './acorn-esm.js';\nvar asEsm = true;\nexport { Interpreter, parse, version as acornVersion };\n\n" },
+  { original: 'acorn.js', new: 'acorn-esm.js', insertionAnchor: 'var version', contentToAdd: "export { parse, version };\nvar asEsm = true;\n\n" }
 ];
 
 // Loop through each file to modify

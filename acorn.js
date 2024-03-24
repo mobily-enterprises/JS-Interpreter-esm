@@ -31,10 +31,14 @@ var version
 
 (function (root, factory) {
    if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
-      // CommonJS
+      // CommonJS. The commonJS module will export 'parse' and 'version'
       factory(exports);
+    } else if (typeof asEsm !== 'undefined'){
+      // ESM
+      factory({})
   } else {
-      // Browser globals
+      // Browser globals. In this case, only window.acorn will be set,
+      // which will contain 'parse' and 'version'
       factory(root.acorn || (root.acorn = {}));
   }
 }(typeof self !== 'undefined' ? self : this, function (exports) {

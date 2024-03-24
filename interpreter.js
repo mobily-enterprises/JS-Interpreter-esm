@@ -9,12 +9,18 @@ var Interpreter
 (function (root, factory) {
   if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
       // CommonJS
-      exports.acorn = require('./acorn.js')
+      //
+      // A one-liner to test commonJS is to run node and feed this to it:
+      // int = require('./interpreter.js');i = new int.Interpreter('a = new String(); 4+4;');i.run();i.value;
+      debugger
+      var acorn  = require('./acorn.js')
+      exports.parse = acorn.parse
+      exports.acornVersion = acorn.version
       factory(exports);
   } else if (typeof asEsm !== 'undefined'){
       // ESM
       // No need to define acorn, since it will be defined in an injected line
-      factory({acorn})
+      factory({ parse, acornVersion: version })
   } else {  
       // Browser globals
       // if (!root.acorn) throw new Error('Acorn needs to be in the `window` namespace')
@@ -375,7 +381,7 @@ Interpreter.prototype.parse_ = function(code, sourceFile) {
      options[name] = Interpreter.PARSE_OPTIONS[name];
    }
    options.sourceFile = sourceFile;
-   return exports.acorn.parse(code, options);
+   return exports.parse(code, options);
 };
 
 /**
