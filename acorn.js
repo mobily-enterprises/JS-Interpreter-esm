@@ -31,7 +31,7 @@ debugger
   debugger
    if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
       // CommonJS
-      factory({});
+      factory(exports);
   } else {
       // Browser globals
       factory(root.acorn || (root.acorn = {}));

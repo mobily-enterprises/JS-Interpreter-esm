@@ -13,8 +13,8 @@ var acorn
   debugger
   if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
       // CommonJS
-      acorn = require('./acorn.js')
-      factory({acorn});
+      exports.acorn = require('./acorn.js')
+      factory(exports);
   } else if (typeof asEsm !== 'undefined'){
       // ESM
       // No need to define acorn, since it will be defined in an injected line
@@ -1573,6 +1573,7 @@ Interpreter.prototype.initString = function(globalObject) {
   var wrapper;
   // String constructor.
   wrapper = function String(value) {
+debugger
     value = arguments.length ? String(value) : '';
     if (thisInterpreter.calledWithNew()) {
       // Called as `new String()`.
